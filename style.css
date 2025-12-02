@@ -1,8 +1,18 @@
 /* 🌈 THE RAINBOW CALCULATOR - Lookin' good! 🤪 */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #ffe6e6; /* Light Pink/Red Background */
+    font-family: Arial, sans-serif;
+}
+
 .calculator {
     /* Larger and slightly tilted for a fun look */
     width: 350px;
-    margin: 50px auto;
     /* No boring border! Use a bold border color. */
     border: 5px solid #ff4d4d; /* Bright Red Border */
     border-radius: 20px; /* Super rounded corners */
@@ -20,14 +30,14 @@
 .display input {
     width: 100%;
     height: 60px; /* Taller display */
-    font-family: 'Comic Sans MS', cursive; /* Use a funny font! */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Funny font */
     font-size: 36px; /* Big, friendly numbers */
     text-align: right;
     color: #333333; /* Dark text */
     /* Funky display style */
     border: 3px dashed #33cc33; /* Dashed Green Border */
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 10px;
     background-color: #ffffff; /* White screen */
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle inner shadow */
 }
@@ -42,15 +52,15 @@
 .keys button {
     width: 100%;
     height: 60px; /* Taller buttons */
-    font-family: 'Comic Sans MS', cursive; 
+    font-family: 'Comic Sans MS', cursive, sans-serif; 
     font-size: 24px;
     font-weight: bold;
     color: #ffffff; /* White text on colorful buttons */
-    border: none; /* Let the colors do the talking! */
+    border: none;
     border-radius: 15px; /* Very rounded buttons */
     cursor: pointer;
-    transition: all 0.1s ease; /* Smooth hover effect */
-    /* Default button color - a playful pink */
+    transition: all 0.1s ease; /* Smooth press effect */
+    /* Default button color (numbers/dot) - a playful pink */
     background-color: #ff99cc; 
     /* Button shadow for a 3D effect */
     box-shadow: 0 5px 0 0 #cc6699; 
@@ -74,26 +84,9 @@
     box-shadow: 0 5px 0 0 #cc0000;
 }
 
-
-/* Pressing the Button (Hover/Active) - Makes it look 'squished' */
-.keys button:hover {
-    background-color: #ffcce5; /* Lighter shade on hover */
-}
-
+/* Pressing the Button (Active) - Makes it look 'squished' */
 .keys button:active {
     /* When clicked, lift the button to simulate pressing */
-    box-shadow: 0 2px 0 0 #cc6699;
-    transform: translateY(3px);
-}
-
-/* Apply specific active style to operators */
-.keys button.operator:active {
-    box-shadow: 0 2px 0 0 #1a991a;
-    transform: translateY(3px);
-}
-
-/* Apply specific active style to equals */
-.keys button.equals:active {
-    box-shadow: 0 2px 0 0 #cc5200;
-    transform: translateY(3px);
+    box-shadow: 0 2px 0 0; /* Shrink the shadow */
+    transform: translateY(3px); /* Move button down */
 }
