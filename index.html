@@ -3,109 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Funky Calculator</title>
-    <style>
-        /* ==================================================
-        🌈 THE RAINBOW CALCULATOR STYLES 🤪
-        ==================================================
-        */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffe6e6; /* Light Pink/Red Background */
-        }
-        
-        .calculator {
-            /* Larger and slightly tilted for a fun look */
-            width: 350px;
-            margin: 50px auto;
-            /* No boring border! Use a bold border color. */
-            border: 5px solid #ff4d4d; /* Bright Red Border */
-            border-radius: 20px; /* Super rounded corners */
-            padding: 15px;
-            /* Exaggerated, colorful shadow for a lifted look */
-            box-shadow: 10px 10px 0px 5px #ffcc00; /* Yellow Offset Shadow */
-            background-color: #66ccff; /* Sky Blue background */
-        }
-
-        /* Display: The Brain of the Calculator 🧠 */
-        .display {
-            margin-bottom: 15px;
-        }
-
-        .display input {
-            width: 100%;
-            height: 60px; /* Taller display */
-            font-family: 'Comic Sans MS', cursive; /* Use a funny font! */
-            font-size: 36px; /* Big, friendly numbers */
-            text-align: right;
-            color: #333333; /* Dark text */
-            /* Funky display style */
-            border: 3px dashed #33cc33; /* Dashed Green Border */
-            border-radius: 10px;
-            padding: 5px;
-            background-color: #ffffff; /* White screen */
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle inner shadow */
-        }
-
-        /* Keys: The Fun Buttons! 🎉 */
-        .keys {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px; /* Wider gap between buttons */
-        }
-
-        .keys button {
-            width: 100%;
-            height: 60px; /* Taller buttons */
-            font-family: 'Comic Sans MS', cursive; 
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffffff; /* White text on colorful buttons */
-            border: none; /* Let the colors do the talking! */
-            border-radius: 15px; /* Very rounded buttons */
-            cursor: pointer;
-            transition: all 0.1s ease; /* Smooth hover effect */
-            /* Default button color (numbers/dot) - a playful pink */
-            background-color: #ff99cc; 
-            /* Button shadow for a 3D effect */
-            box-shadow: 0 5px 0 0 #cc6699; 
-        }
-
-        /* Special color for the operators (+, -, *, /) */
-        .keys button.operator {
-            background-color: #33cc33; /* Bright Green */
-            box-shadow: 0 5px 0 0 #1a991a;
-        }
-
-        /* Special color for the equals button */
-        .keys button.equals {
-            background-color: #ff6600; /* Bright Orange */
-            box-shadow: 0 5px 0 0 #cc5200;
-        }
-
-        /* Special color for clear/reset buttons */
-        .keys button.clear {
-            background-color: #ff3300; /* Fire Red */
-            box-shadow: 0 5px 0 0 #cc0000;
-        }
-
-
-        /* Pressing the Button (Active) - Makes it look 'squished' */
-        .keys button:active {
-            /* When clicked, lift the button to simulate pressing */
-            box-shadow: 0 2px 0 0 #cc6699;
-            transform: translateY(3px);
-        }
-
-        /* Apply specific active style to other buttons */
-        .keys button.operator:active {
-            box-shadow: 0 2px 0 0 #1a991a;
-        }
-
-        .keys button.equals:active {
-            box-shadow: 0 2px 0 0 #cc5200;
-        }
-    </style>
+    <title>Funky Calculator Project</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
@@ -115,65 +14,35 @@
         </div>
         
         <div class="keys">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendInput('/')">/</button>
-            <button class="operator" onclick="appendInput('*')">x</button>
-            <button class="operator" onclick="appendInput('-')">-</button>
-
-            <button onclick="appendInput('7')">7</button>
-            <button onclick="appendInput('8')">8</button>
-            <button onclick="appendInput('9')">9</button>
-            <button class="operator" onclick="appendInput('+')">+</button>
-
-            <button onclick="appendInput('4')">4</button>
-            <button onclick="appendInput('5')">5</button>
-            <button onclick="appendInput('6')">6</button>
+            <button class="clear" data-action="clear">C</button>
             
-            <button onclick="appendInput('1')">1</button>
-            <button onclick="appendInput('2')">2</button>
-            <button onclick="appendInput('3')">3</button>
-            <button class="equals" onclick="calculateResult()">=</button>
+            <button class="operator" data-input="/">&divide;</button>
+            <button class="operator" data-input="*">x</button>
+            <button class="operator" data-input="-">-</button>
 
-            <button onclick="appendInput('0')">0</button>
-            <button onclick="appendInput('.')">.</button>
-            <button style="visibility: hidden;">_</button>
-            <button style="visibility: hidden;">_</button>
+            <button data-input="7">7</button>
+            <button data-input="8">8</button>
+            <button data-input="9">9</button>
+            <button class="operator" data-input="+">+</button>
+
+            <button data-input="4">4</button>
+            <button data-input="5">5</button>
+            <button data-input="6">6</button>
+
+            <button data-input="1">1</button>
+            <button data-input="2">2</button>
+            <button data-input="3">3</button>
+            
+            <button class="equals" data-action="calculate">=</button>
+
+            <button data-input="0">0</button>
+            <button data-input=".">.</button>
+            <button style="visibility: hidden;"></button>
+            <button style="visibility: hidden;"></button>
         </div>
     </div>
 
-    <script>
-        const resultInput = document.getElementById('result');
-
-        // Function to append the button value to the display
-        function appendInput(value) {
-            // Clear the initial '0' if a number is pressed
-            if (resultInput.value === '0' && value !== '.') {
-                resultInput.value = value;
-            } else {
-                resultInput.value += value;
-            }
-        }
-
-        // Function to clear the display
-        function clearDisplay() {
-            resultInput.value = '0';
-        }
-
-        // Function to calculate the result
-        function calculateResult() {
-            try {
-                // Use the built-in eval function for simple calculation
-                let result = eval(resultInput.value);
-                // Handle floating point errors (optional, for cleaner display)
-                if (result % 1 !== 0) {
-                     result = parseFloat(result.toFixed(5));
-                }
-                resultInput.value = result;
-            } catch (error) {
-                resultInput.value = 'ERROR!';
-            }
-        }
-    </script>
+    <script src="script.js"></script> 
 
 </body>
 </html>
